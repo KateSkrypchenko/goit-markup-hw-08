@@ -1,29 +1,42 @@
 .clients {
   @extend %section;
-}
 
-.clients__container {
-  @extend %container;
+  @media screen and (min-width: 1200px) {
+    padding: 94px 0;
+  }
 }
 
 .clients__title {
   @extend %title;
+
+  @media screen and (min-width: 1200px) {
+    margin-bottom: 50px;
+    @include font(700, 36px, 1.17, 0.03em);
+  }
 }
 
 .clients-list {
-  @extend %list;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 30px;
 }
 
 .clients-list__item {
-  width: 170px;
+  width: calc((100% - 1 * 30px) / 2);
   height: 92px;
+
+  @media screen and (min-width: 768px) {
+  width: calc((100% - 2 * 30px) / 3);
+  }
+
+  @media screen and (min-width: 1200px) {
+  width: calc((100% - 5 * 30px) / 6);
+  }
 }
 
 .clients-list__link {
-  @extend %link;
+  @include animation(color, border, null);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,8 +46,6 @@
   color: $color-soc;
   border: 1px solid $color-soc;
   border-radius: 4px;
-
-  transition: color 250ms $timing-function, border 250ms $timing-function;
 
   &:hover,
   &:focus {

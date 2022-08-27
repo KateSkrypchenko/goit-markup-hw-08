@@ -1,31 +1,32 @@
 .works {
-  @extend %section;
-  padding-top: 0;
-}
+  display: none;
 
-.works__container {
-  @extend %container;
+  @media screen and (min-width: 1200px) {
+    display: block;
+    padding-bottom: 94px;
+  }
 }
 
 .works__title {
-  @extend %title;
+  @include font(700, 36px, 1.17, 0.03em);
+
+  margin-bottom: 50px;
+  text-align: center;
+  color: $secondary-color-text;
 }
 
 .works-list {
-  @extend %list;
   display: flex;
-  column-gap: 30px;
+  gap: 30px;
 }
 
 .works-list__item {
   position: relative;
 }
 
-.works-list__img {
-  @extend %img;
-}
-
 .works-list__text {
+  @include font(700, 14px, 1.14, 0.03em);
+
   position: absolute;
   bottom: 0;
 
@@ -35,10 +36,6 @@
   width: 100%;
   height: 70px;
 
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.14;
-  letter-spacing: 0.03em;
   text-transform: uppercase;
 
   color: $hero-color-text;

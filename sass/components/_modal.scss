@@ -1,13 +1,15 @@
 .backdrop {
+  @include animation(opacity, visibility, null);
+
   position: fixed;
   top: 0;
   left: 0;
   opacity: 1;
-  transition: opacity 250ms $timing-function, visibility 250ms $timing-function;
   z-index: 3;
 
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -19,15 +21,16 @@
 }
 
 .modal {
+  @include animation(transform, null, null);
+
   position: absolute;
   top: 50%;
   left: 50%;
   padding: 40px;
   transform: translate(-50%, -50%) scale(1);
-  transition: transform 250ms $timing-function;
 
-  width: 528px;
-  height: 581px;
+  width: calc(100vw - 30px);
+  height: auto;
 
   background-color: $primary-bgc;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
@@ -37,9 +40,20 @@
   .backdrop.is-hidden & {
     transform: translate(-50%, -50%) scale(0.8);
   }
+
+  @media screen and (min-width: 480px) {
+    width: 450px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 528px;
+    height: 581px;
+  }
 }
 
 .modal__button {
+  @include animation(color, null, null);
+
   position: absolute;
   top: 8px;
   right: 8px;
@@ -56,8 +70,6 @@
   cursor: pointer;
   color: $header-logo-text;
 
-  transition: color 250ms $timing-function;
-
   &:hover,
   &:focus {
     color: $accent-color;
@@ -69,16 +81,18 @@
 }
 
 .modal__title {
+  @include font(700, 20px, 1.5, 0.03em);
+
   display: block;
   margin-bottom: 12px;
-  
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.15;
+
   text-align: center;
-  letter-spacing: 0.03em;
 
   color: $secondary-color-text;
+
+  @media screen and (min-width: 1200px) {
+    line-height: 1.15;
+  }
 }
 
 .modal-form__wrap {
@@ -90,16 +104,13 @@
 }
 
 .modal-form__label {
+  @include animation(color, null, null);
+  @include font(400, 12px, 1.17, 0.01em);
+
   display: block;
   margin-bottom: 4px;
 
-  font-size: 12px;
-  line-height: 1.17;
-  letter-spacing: 0.01em;
-
   color: $primary-color-text;
-
-  transition: color 250ms $timing-function;
 
   .modal-form__wrap:hover &,
   .modal-form__wrap:focus &,
@@ -108,25 +119,23 @@
     color: $accent-color;
   }
 }
+
 .modal-form__box {
   position: relative;
 }
 
 .modal-form__input {
+  @include animation(border, null, null);
+  @include font(400, 12px, 1.17, 0.01em);
+
   padding: 12px 42px;
   width: 100%;
   height: 40px;
-
-  font-size: 12px;
-  line-height: 1.17;
-  letter-spacing: 0.01em;
 
   border: 1px solid rgba(33, 33, 33, 0.2);
   border-radius: 4px;
 
   color: inherit;
-
-  transition: border 250ms $timing-function;
 
   &:hover,
   &:focus,
@@ -137,14 +146,14 @@
 }
 
 .modal-form__icon {
+  @include animation(fill, null, null);
+
   position: absolute;
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
 
   fill: $secondary-color-text;
-
-  transition: fill 250ms $timing-function;
 
   .modal-form__input:hover + &,
   .modal-form__input:focus + &,
@@ -154,6 +163,9 @@
 }
 
 .modal-form__text {
+  @include animation(border, null, null);
+  @include font(400, 12px, 1.17, 0.01em);
+
   display: block;
   padding: 12px 16px;
   width: 100%;
@@ -164,18 +176,10 @@
   border: 1px solid rgba(33, 33, 33, 0.2);
   border-radius: 4px;
 
-  font-size: 12px;
-  line-height: 1.17;
-  letter-spacing: 0.01em;
-
   color: inherit;
 
-  transition: border 250ms $timing-function;
-
   &::placeholder {
-    font-size: 12px;
-    line-height: 1.17;
-    letter-spacing: 0.01em;
+    @include font(400, 12px, 1.17, 0.01em);
 
     color: rgba(117, 117, 117, 0.5);
   }
@@ -197,29 +201,30 @@
 }
 
 .policy__label {
+  @include font(400, 12px, 1.17, 0.03em);
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  font-size: 14px;
-  line-height: 1.71;
-  letter-spacing: 0.03em;
+  @media screen and (min-width: 1200px) {
+    @include font(400, 14px, 1.71, 0.03em);
+  }
 }
 
 .policy__thumb {
+  @include animation(background-color, border-color, box-shadow);
+
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 7px;
+  margin-right: 8px;
   width: 16px;
   height: 15px;
 
   border: 1px solid #212121;
   border-radius: 2px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-  transition: background-color 250ms $timing-function, border-color 250ms $timing-function,
-    box-shadow 250ms $timing-function;
 
   .policy__checkbox:hover + .policy__label > &,
   .policy__checkbox:focus + .policy__label > & {
@@ -234,9 +239,9 @@
 }
 
 .policy__icon {
-  fill: transparent;
+  @include animation(fill, null, null);
 
-  transition: fill 250ms $timing-function;
+  fill: transparent;
 
   .policy__checkbox:checked + .policy__label & {
     fill: $hero-color-text;
@@ -244,20 +249,9 @@
 }
 
 .policy__link {
-  position: relative;
-
+  line-height: 1;
+  border-bottom: 1px solid $accent-color;
   cursor: pointer;
 
   color: $accent-color;
-
-  &::after {
-    position: absolute;
-    bottom: 4.5px;
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-
-    background-color: $accent-color;
-  }
 }

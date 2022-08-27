@@ -1,9 +1,9 @@
 .portfolio {
   @extend %section;
-}
 
-.portfolio__container {
-  @extend %container;
+  @media screen and (min-width: 1200px) {
+    padding: 94px 0;
+  }
 }
 
 .portfolio__title {
@@ -11,23 +11,37 @@
 }
 
 .card-list {
-  @extend %list;
-
-  display: flex;
-  flex-wrap: wrap;
   width: 100%;
-  gap: 30px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
 }
 
 .card-list__item {
-  flex-basis: calc((100% - 2 * 30px) / 3);
+  &:not(:last-child) {
+    @media screen and (max-width: 767px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 1 * 30px) / 2);
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: calc((100% - 2 * 30px) / 3);
+  }
 }
 
 .card-list__link {
-  @extend %link;
+  @include animation(box-shadow, null, null);
 
-  display: block;
-  transition: box-shadow 250ms $timing-function;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &:focus,
   &:hover {
@@ -41,11 +55,9 @@
   overflow: hidden;
 }
 
-.card-list__img {
-  @extend %img;
-}
-
 .card-list__action {
+  @include animation(transform, null, null);
+
   position: absolute;
   top: 0;
   transform: translateY(100%);
@@ -53,7 +65,7 @@
   width: 100%;
   height: 100%;
 
-  padding: 63px 24px;
+  padding: 77px 24px;
   font-size: 18px;
   line-height: 1.56;
   letter-spacing: 0.03em;
@@ -61,15 +73,22 @@
   color: $hero-color-text;
   background-color: rgba(33, 150, 243, 0.9);
 
-  transition: transform 250ms $timing-function;
-
   .card-list__link:hover &,
   .card-list__link:focus & {
     transform: translateY(0);
   }
+
+  @media screen and (min-width: 768px) {
+    padding: 49px 24px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding: 63px 24px;
+  }
 }
 
 .card-list__wrap {
+  flex-grow: 1;
   padding: 20px 24px;
   border-bottom: 1px solid $border-color;
   border-right: 1px solid $border-color;
@@ -77,20 +96,12 @@
 }
 
 .card-list__title {
+  @include font(700, 18px, 2, 0.06em);
   margin-bottom: 4px;
-
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 2;
-  letter-spacing: 0.06em;
-
   color: $secondary-color-text;
 }
 
 .card-list__text {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.9;
-
+  @include font(400, 16px, 1.88, 0.03em);
   color: $primary-color-text;
 }
